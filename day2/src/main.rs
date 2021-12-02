@@ -11,7 +11,7 @@ struct Submarine {
 
 impl Submarine {
     fn new() -> Self {
-        Submarine {
+        Self {
             aim: 0,
             depth: 0,
             horizontal_position: 0,
@@ -49,13 +49,9 @@ impl FromStr for Movement {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        //let s = s.trim().to_lowercase();
-        let line: Vec<&str> = s.split(' ').collect();
+        let mut line = s.split(' ');
 
-        match (
-            line.get(0).copied(),
-            line.get(1).map(|v| v.parse().ok()).flatten(),
-        ) {
+        match (line.next(), line.next().map(|v| v.parse().ok()).flatten()) {
             (Some("up"), Some(v)) => Ok(Movement::Up(v)),
             (Some("down"), Some(v)) => Ok(Movement::Down(v)),
             (Some("forward"), Some(v)) => Ok(Movement::Forward(v)),
