@@ -8,8 +8,8 @@ fn main() {
     BufReader::new(file).read_line(&mut line).ok();
     let mut population: VecDeque<u64> = VecDeque::from([0; 9]);
 
-    for fish in line.trim().split(',').map(|v| v.parse::<usize>().unwrap()) {
-        population[fish] += 1;
+    for days_til_propagation in line.trim().split(',').map(|v| v.parse::<usize>().unwrap()) {
+        population[days_til_propagation] += 1;
     }
     for _ in 0..80 {
         population.rotate_left(1);
